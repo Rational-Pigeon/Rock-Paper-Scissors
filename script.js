@@ -18,6 +18,7 @@ function getComputerChoice() {
             break;
     }
 
+    console.log(`Computer's choice is ${computerChoice}.`)
     return computerChoice;
 }
 
@@ -44,5 +45,55 @@ function getHumanChoice() {
             console.log("Invalid input. Try again!")
             humanChoice = getHumanChoice();
     }
+    console.log(`Your choice is ${humanChoice}.`)
     return humanChoice;
+}
+
+function playRound() {
+    let humanChoice = getHumanChoice();
+    let computerChoice = getComputerChoice();
+
+    if (humanChoice === computerChoice) {
+        console.log("It's a tie!")
+        return;
+    }
+    else {
+        switch (humanChoice) {
+            case "rock":
+                if (computerChoice === "scissors") {
+                    console.log("You Win! Rock beats scissors.")
+                    humanScore++;
+                    return;
+                }
+                else {
+                    console.log("You lose! Paper beats rock")
+                    computerScore++;
+                    return;
+                }
+
+            case "paper":
+                if (computerChoice === "rock") {
+                    console.log("You win! Paper beats rock.")
+                    humanScore++;
+                    return;
+                }
+                else {
+                    console.log("You lose! Scissors beat paper")
+                    computerScore++;
+                    return;
+                }
+
+            case "scissors":
+                if (computerChoice === "paper") {
+                    console.log("You win! Scissors beat paper.")
+                    humanScore++;
+                    return;
+                }
+                else {
+                    console.log("You lose! Rock beats scissors.")
+                    computerScore++;
+                    return;
+                }
+        }
+    }
 }
