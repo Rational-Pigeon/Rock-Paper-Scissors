@@ -97,3 +97,34 @@ function playRound() {
         }
     }
 }
+
+function playGame() {
+    humanScore = 0;
+    computerScore = 0;
+
+    for (let i = 0; i < 5; i++) {
+        playRound();
+    }
+
+    console.log(`Player Score: ${humanScore}`);
+    console.log(`Computer Score: ${computerScore}`);
+
+    if (humanScore === computerScore) {
+        console.log("It's a draw!");
+    }
+    else if (computerScore > humanScore) {
+        console.log("You lost. Better luck next time!");
+    }
+    else {
+        console.log("Congratulations! you win!");
+    }
+
+    let playAgain = prompt("Do you want to play again? (y/n) ").toLowerCase();
+
+    if (playAgain === "y") {
+        playGame();
+    }
+    else { return; }
+}
+
+playGame();
