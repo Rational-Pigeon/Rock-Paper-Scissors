@@ -1,5 +1,23 @@
+let roundsCount = 0;
 let humanScore = 0;
 let computerScore = 0;
+const computerChoiceMessage = document.querySelector(".cmp-choice");
+const roundMessage = document.querySelector(".round-result")
+const buttons = document.querySelectorAll("button");
+const rounds = document.querySelector(".rounds");
+const humanScoreDisplay = document.querySelector("#player-score");
+const computerScoreDisplay = document.querySelector("#computer-score");
+
+computerScoreDisplay.textContent = `Computer Score: ${computerScore};`
+humanScoreDisplay.textContent = `Player Score: ${humanScore}`;
+
+console.log(buttons);
+
+buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+        playRound(button.textContent.toLowerCase());
+    })
+})
 
 // Returns a random choice between "rock", "paper", and "scissors"
 function getComputerChoice() {
@@ -18,113 +36,90 @@ function getComputerChoice() {
             break;
     }
 
-    console.log(`Computer's choice is ${computerChoice}.`)
+    computerChoiceMessage.textContent = `Computer's choice is ${computerChoice}.`;
     return computerChoice;
 }
 
-// Gets and returns player choice. Reprompts the user if input was invalid.
-function getHumanChoice() {
-    let input = prompt("Make a choice! [R]ock, [P]aper, [S]cissors: ");
-    input = input.toLowerCase();
 
-    let humanChoice;
-    switch (input) {
-        case "rock":
-        case "r":
-            humanChoice = "rock";
-            break;
-        case "paper":
-        case "p":
-            humanChoice = "paper";
-            break;
-        case "scissors":
-        case "s":
-            humanChoice = "scissors";
-            break
-        default:
-            console.log("Invalid input. Try again!")
-            humanChoice = getHumanChoice();
-    }
-    console.log(`Your choice is ${humanChoice}.`)
-    return humanChoice;
-}
-
-function playRound() {
-    let humanChoice = getHumanChoice();
+function playRound(humanChoice) {
     let computerChoice = getComputerChoice();
 
     if (humanChoice === computerChoice) {
-        console.log("It's a tie!")
+        roundMessage.textContent = "It's a tie!";
         return;
     }
     else {
         switch (humanChoice) {
             case "rock":
                 if (computerChoice === "scissors") {
-                    console.log("You Win! Rock beats scissors.")
+                    roundMessage.textContent = "You Win! Rock beats scissors.";
                     humanScore++;
-                    return;
+                    break;
                 }
                 else {
-                    console.log("You lose! Paper beats rock")
+                    roundMessage.textContent = "You lose! Paper beats rock";
                     computerScore++;
-                    return;
+                    break;
                 }
 
             case "paper":
                 if (computerChoice === "rock") {
-                    console.log("You win! Paper beats rock.")
+                    roundMessage.textContent = "You win! Paper beats rock.";
                     humanScore++;
-                    return;
+                    break;
                 }
                 else {
-                    console.log("You lose! Scissors beat paper")
+                    roundMessage.textContent = "You lose! Scissors beat paper";
                     computerScore++;
-                    return;
+                    break;
                 }
 
             case "scissors":
                 if (computerChoice === "paper") {
-                    console.log("You win! Scissors beat paper.")
+                    roundMessage.textContent = "You win! Scissors beat paper.";
                     humanScore++;
-                    return;
+                    break;
                 }
                 else {
-                    console.log("You lose! Rock beats scissors.")
+                    roundMessage.textContent = "You lose! Rock beats scissors.";
                     computerScore++;
-                    return;
+                    break;
                 }
         }
     }
+    computerScoreDisplay.textContent = `Computer Score: ${computerScore};`
+    humanScoreDisplay.textContent = `Player Score: ${humanScore}`;
+    if (humanScore >= 5) { alert("Congratulations! You win! Refresh the page to play again") };
+    if (computerScore >= 5) { alert("You lost. Better luck next time! Refresh the page to try again") };
 }
 
-function playGame() {
-    humanScore = 0;
-    computerScore = 0;
+// function playGame() {
+//     humanScore = 0;
+//     computerScore = 0;
+//
+//     for (let i = 0; i < 5; i++) {
+//         playRound();
+//     }
+//
+//     console.log(`Player Score: ${humanScore}`);
+//     console.log(`Computer Score: ${computerScore}`);
+//
+//     if (humanScore === computerScore) {
+//         console.log("It's a draw!");
+//     }
+//     else if (computerScore > humanScore) {
+//         console.log("You lost. Better luck next time!");
+//     }
+//     else {
+//         console.log("Congratulations! you win!");
+//     }
+//
+//     let playAgain = prompt("Do you want to play again? (y/n) ").toLowerCase();
+//
+//     if (playAgain === "y") {
+//         playGame();
+//     }
+//     else { return; }
+// }'
 
-    for (let i = 0; i < 5; i++) {
-        playRound();
-    }
-
-    console.log(`Player Score: ${humanScore}`);
-    console.log(`Computer Score: ${computerScore}`);
-
-    if (humanScore === computerScore) {
-        console.log("It's a draw!");
-    }
-    else if (computerScore > humanScore) {
-        console.log("You lost. Better luck next time!");
-    }
-    else {
-        console.log("Congratulations! you win!");
-    }
-
-    let playAgain = prompt("Do you want to play again? (y/n) ").toLowerCase();
-
-    if (playAgain === "y") {
-        playGame();
-    }
-    else { return; }
-}
-
-playGame();
+//playGame();

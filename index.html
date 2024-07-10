@@ -4,11 +4,32 @@
 <head>
     <meta charset="UTF-8">
     <title>Rock-Paper-Scissors</title>
-    <script src="./script.js"></script>
+    <script src="./script.js" defer></script>
+    <link rel="stylesheet" src="./styles.css">
 </head>
 
 <body>
+    <div class="score-bar">
+        <ul class="scores">
+            <li id="player-score"></li>
+            <li id="computer-score"></li>
+        </ul>
+        <p class="rounds"></p>
+    </div>
+    <div class="container">
+        <button>Rock</button>
+        <button>Paper</button>
+        <button>Scissors</button>
+    </div>
 
+    <div class="msg">
+        <p class="cmp-choice"></p>
+        <p class="round-result"></p>
+    </div>
+
+    <div class="results">
+
+    </div>
 </body>
 
 </html>
